@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from anthropic import Anthropic
 import json
 import os
 from benefits_db import BENEFITS_DATABASE, CATEGORIES
