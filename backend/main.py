@@ -1,4 +1,4 @@
-# NaijaBenefits AI - Grok Version
+# NaijaBenefits AI - Groq Version
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -30,8 +30,8 @@ async def options_handler(request: Request, path: str):
     )
 
 client = OpenAI(
-    api_key=os.getenv("XAI_API_KEY"),
-    base_url="https://api.x.ai/v1"
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1"
 )
 
 class ChatRequest(BaseModel):
@@ -65,7 +65,7 @@ async def chat(req: ChatRequest):
     system = get_system_prompt(req.language, BENEFITS_DATABASE)
     messages = req.history + [{"role": "user", "content": req.message}]
     response = client.chat.completions.create(
-        model="grok-3-mini",
+        model="llama-3.3-70b-versatile",
         max_tokens=1000,
         messages=[{"role": "system", "content": system}] + messages
     )

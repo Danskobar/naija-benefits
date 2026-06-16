@@ -83,14 +83,14 @@ export default function ChatBot({ language }) {
       });
       const data = await res.json();
       setMessages([...newMessages, { role: "assistant", content: data.reply }]);
-    } catch {
-      setMessages([...newMessages, {
-        role: "assistant",
-        content: language === "pidgin"
-          ? "E get problem o! Try again abeg."
-          : "Something went wrong. Please try again."
-      }]);
-    }
+    } catch (err) {
+  console.error("Full error:", err);
+  console.error("Error message:", err.message);
+  setMessages([{
+    role: "assistant",
+    content: "Error: " + err.message
+  }]);
+}
     setLoading(false);
   };
 
